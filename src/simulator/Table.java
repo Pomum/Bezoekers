@@ -2,7 +2,6 @@ package simulator;
 
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
