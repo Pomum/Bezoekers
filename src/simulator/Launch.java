@@ -12,7 +12,6 @@ public class Launch{
 		JPanel panel = new ViewPanel(frame);
 		
 		frame.getContentPane().add(panel);
-		new InputHandler(frame);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setMinimumSize(new Dimension(1024,768));

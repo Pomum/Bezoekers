@@ -24,7 +24,7 @@ public class ViewPanel extends JPanel implements ActionListener
 	public ViewPanel(JFrame frame)
 	{
 		this.frame = frame;
-		
+		new InputHandler(frame, this, tiles);
 		initTest();
 		
 		new Timer(1000/60,this).start();
@@ -61,7 +61,7 @@ public class ViewPanel extends JPanel implements ActionListener
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		for (int i = 0; i < tiles.size(); i++) {
-			g2.fill(tiles.get(i).getRect());
+			tiles.get(i).paint(g2);
 		}
 		for (int x = 0; x < NPCs.size(); x++) {
 			NPCs.get(x).paint(g2);
@@ -73,7 +73,7 @@ public class ViewPanel extends JPanel implements ActionListener
 
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new PopUp(frame, tiles);
+				new PopUp(frame, tiles, tiles.get(0));
 			}
 		});
 		this.add(b);
