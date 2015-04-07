@@ -2,50 +2,51 @@ package simulator;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 
-public class NPC {
+public class NPC{
 	private static final String PATH = "visitor.png";
 	private Image image;
 	private Point2D position;
 	private double speed,direction;
-	private Tile target,destination = null;
+	private Tile target,destination;
 	private List<Tile> tiles;
-	
 	public NPC(Point2D position, List<Tile> tiles){
 		image = new ImageIcon(PATH).getImage();
 		this.position = position;
 		this.tiles = tiles;
 		speed = 1;
 		direction = 1;
-		
-		destination = getDestination();
+		getDestination();
 		newTarget();
 	}
 	
-	private Tile getDestination() {
-		Random random = new Random();
-		Tile oldDestination = destination;
-		if (!destination.equals(null)) {
-			while (destination.equals(oldDestination)) {
+	public void getDestination() {
+		if (!(tiles.isEmpty())){
+			Random random = new Random();
+			Tile oldDestination = destination;
+			while (destination == oldDestination) {
 				int number = random.nextInt(tiles.size());
 				if (tiles.get(number).isBuilding()) {
 					destination = tiles.get(number);
 				}
 			}
+		} else{
+			destination = new Tile(new Point2D.Double(200,200));
 		}
-		
-		return destination;
+		System.out.println(destination.getPosition());
 	}
-
-	void update(ArrayList<NPC> andereNPCs) {
+	
+	public void update(List<NPC> andereNPCs) {
 		rotations();
 
 		Point2D oldPositie = position;
@@ -85,7 +86,7 @@ public class NPC {
 		}
 	}
 		
-	public boolean hasCollision(ArrayList<NPC> NPCs) {
+	public boolean hasCollision(List<NPC> NPCs) {
 		for (NPC npc : NPCs) {
 			if (npc != this){				
 				if (npc.position.distance(position) < 15){
@@ -97,15 +98,32 @@ public class NPC {
 	}
 	
 	public void newTarget() {
-		if(target.getRect().contains(position)){
-			for(int i = 0 ; i < target.getPaths().size() ; i++){
-				if(target.getPaths().get(i).getDestination().equals(destination)){
-					target = target.getPaths().get(i).getTarget();
-					break;
+		if (!(tiles.isEmpty())) {
+			if (!(target == null)) {
+				if (target.getRect().contains(position)) {
+					System.out.println("ping");
+					/*for (int i = 0; i < target.getPaths().size(); i++) {
+						if (target.getPaths().get(i).getDestination().equals(destination)) {
+							target = target.getPaths().get(i).getTarget();
+							break;
+						}
+					}*/
+					target = tiles.get(new Random().nextInt(tiles.size()));
+				}
+			}else{
+				for(int i = 0 ; i < tiles.size() ; i++){
+					if (tiles.get(i).isEntrance()) {
+						target = tiles.get(i);
+						break;
+					}
 				}
 			}
+		} else {
+			target = destination;
 		}
+		//System.out.println(target.getPosition());
 	}
+	
 	
 	public void paint(Graphics2D g)
 	{
@@ -114,5 +132,5 @@ public class NPC {
 		tx.rotate(direction, 8, 8);
 		
 		g.drawImage(image, tx ,null);
-	}	
+	}
 }

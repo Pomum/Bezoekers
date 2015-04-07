@@ -1,6 +1,5 @@
 package simulator;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -12,8 +11,9 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
-public class ViewPanel extends JPanel
+public class ViewPanel extends JPanel implements ActionListener
 {
 
 	private static final long serialVersionUID = 1L;
@@ -23,15 +23,29 @@ public class ViewPanel extends JPanel
 	
 	public ViewPanel(JFrame frame)
 	{
-		setBackground(Color.white);
-		setVisible(true);
-		addPopUp();
 		this.frame = frame;
-		tiles.add(new Tile(new Point2D.Double(0, 0)));
-		tiles.add(new Tile(new Point2D.Double(200 + 10, 0)));
-		tiles.add(new Tile(new Point2D.Double(0, 200 + 10)));
-		tiles.add(new Tile(new Point2D.Double(200 + 10, 200 + 10)));
-		NPCs.add(new NPC(new Point2D.Double(300, 300),tiles));
+		
+		initTest();
+		
+		new Timer(1000/60,this).start();
+	}
+	private void initTest(){
+		addPopUp();
+		
+		Tile tile1 = new Tile(new Point2D.Double(0, 0));
+		tile1.setBuilding(true);
+		Tile tile2 = new Tile(new Point2D.Double(200 + 10, 0));
+		tile2.setBuilding(true);
+		Tile tile3 = new Tile(new Point2D.Double(0, 200 + 10));
+		tile3.setBuilding(true);
+		Tile tile4 = new Tile(new Point2D.Double(200 + 10, 200 + 10));
+		tile4.setEntrance(true);
+		tiles.add(tile1);
+		tiles.add(tile2);
+		tiles.add(tile3);
+		tiles.add(tile4);
+		NPC npc1 = new NPC(new Point2D.Double(300, 300),tiles);
+		NPCs.add(npc1);
 		//new PopUp(frame, tiles);
 	}
 	
@@ -46,19 +60,21 @@ public class ViewPanel extends JPanel
 		}
 	}
 	
-	public void addPopUp()
-	{
+	public void addPopUp() {
 		JButton b = new JButton("POPUP =]");
-		
-		b.addActionListener(new ActionListener(){
-	    	public void actionPerformed(ActionEvent e)
-	    	{
-	    		new PopUp(frame, tiles);
-	    	}
-	    });
-		
-	this.add(b);
-	
+
+		b.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new PopUp(frame, tiles);
+			}
+		});
+		this.add(b);
 	}
 
+	public void actionPerformed(ActionEvent e) {
+		for(NPC npc : NPCs){
+			npc.update(NPCs);
+		}
+		repaint();
+	}
 }
