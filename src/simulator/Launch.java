@@ -9,11 +9,12 @@ public class Launch{
 
 	public static void main(String[] args){
 		JFrame frame = new JFrame(":D");
-		JPanel panel = new ViewPanel();
+		JPanel panel = new ViewPanel(frame);
 		frame.getContentPane().add(panel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setMinimumSize(new Dimension(1024,768));
 		frame.pack();
 		frame.setVisible(true);
+		frame.setLocationRelativeTo(null);
 	}
 }
