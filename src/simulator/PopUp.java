@@ -16,63 +16,75 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-public class PopUp extends JDialog
-{
+public class PopUp extends JDialog {
 	private static final long serialVersionUID = 1L;
+	
 	private JPanel content;
 	private JPanel north;
-	private List<Tile> t;
-	private Table table = new Table(t);
+
+	private List<Tile> tiles;
+	private Tile tile;
+
+	private Table table = new Table(tiles);
 	private JTable jtable = table.getJTable();
-		
 	
-	public PopUp(JFrame owner, List<Tile> t)
-	{
+	public PopUp(JFrame owner, List<Tile> tiles,Tile tile) {
 		super(owner, "PopUp =]");
+		this.tiles = tiles;
+		this.tile = tile;
+
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		setLocationRelativeTo(null);
 		
-		content = new JPanel (new BorderLayout());
-		north = new JPanel(new GridLayout(3, 2));
-		setContentPane(content);
+		initWindow();
+		fillWindow();
+		initButton();
 		
-		content.add(north, BorderLayout.NORTH);
-		
-		inhoud();
-		this.t = t;
-		
-		JButton add = new JButton("add");
-		
-		add.addActionListener(new ActionListener(){
-	    	public void actionPerformed(ActionEvent e)
-	    	{
-	    		dispose();
-	    	}
-	    });
-		
-		content.add(add, BorderLayout.SOUTH);
-		
-		JScrollPane scrollPane = new JScrollPane(jtable);
-		content.add(scrollPane, BorderLayout.CENTER);
-		
-		setSize(400,400);
-	    setVisible(true);
+		setSize(400, 400);
+		setVisible(true);
 	}
-	
-	public void inhoud()
-	{
-		JLabel name = new JLabel(" Name:");
-		JTextField invlName = new JTextField();
-		JLabel empty = new JLabel("");
-		JCheckBox check = new JCheckBox("Building");
-		JCheckBox entrance = new JCheckBox("Entrance");
-		JCheckBox exit = new JCheckBox("Exit");
-		
+
+	private void fillWindow() {
+		JLabel		 name 	  = new JLabel(" Name:");
+		JTextField 	 invlName = new JTextField(tile.getName());
+		JLabel 		 empty	  = new JLabel("");
+		JCheckBox 	 check 	  = new JCheckBox("Building");
+		JCheckBox 	 entrance = new JCheckBox("Entrance");
+		JCheckBox 	 exit 	  = new JCheckBox("Exit");
+
+		invlName.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				tile.setName(invlName.getText());
+			}
+		});
 		north.add(name);
 		north.add(invlName);
 		north.add(empty);
 		north.add(check);
 		north.add(entrance);
 		north.add(exit);
+	}
+
+	private void initWindow() {
+		content = new JPanel(new BorderLayout());
+		north = new JPanel(new GridLayout(3, 2));
+		setContentPane(content);
+		content.add(north, BorderLayout.NORTH);
+	}
+
+	private void initButton() {
+
+		JButton add = new JButton("add");
+		JScrollPane scrollPane = new JScrollPane(jtable);
+
+		add.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+
+		content.add(add, BorderLayout.SOUTH);
+		content.add(scrollPane, BorderLayout.CENTER);
 	}
 }

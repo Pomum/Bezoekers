@@ -1,12 +1,16 @@
 package simulator;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Shape;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Tile {
+	private String name = "Tile";
 	private Point2D position;
 	private Shape rect;
 	private boolean isBuilding;
@@ -52,5 +56,23 @@ public class Tile {
 
 	public void setEntrance(boolean isEntrance) {
 		this.isEntrance = isEntrance;
+	}
+	
+	public void paint(Graphics2D g)
+	{ 	
+		g.setColor(Color.GRAY);
+		g.draw(new Rectangle2D.Double(rect.getBounds2D().getX()-1, rect.getBounds2D().getY()-1, width+1, height+1));
+		g.setColor(Color.LIGHT_GRAY);
+		g.fill(rect);
+		g.setColor(Color.RED);
+		g.drawString(name,(int) position.getX(),(int)( position.getY()+height));
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }
