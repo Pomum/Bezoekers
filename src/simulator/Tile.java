@@ -10,17 +10,23 @@ public class Tile {
 	private Point2D position;
 	private Shape rect;
 	private boolean isBuilding;
+	private boolean isEntrance;
 	private double width = 200 ,height = 200;
 	private List<Path> Paths = new ArrayList<Path>();
 
 	public Tile(Point2D position){
 		this.position = position;
 		isBuilding = false;
+		isEntrance = false;
 		rect = new Rectangle2D.Double(position.getX(), position.getY(), width, height);
 	}
 
 	public Shape getRect(){
 		return rect;
+	}
+	
+	public Point2D getPosition(){
+		return position;
 	}
 
 	public Point2D getCenter(){
@@ -32,7 +38,19 @@ public class Tile {
 		return Paths;
 	}
 	
+	public void setBuilding(boolean isBuilding){
+		this.isBuilding = isBuilding;
+	}
+	
 	public boolean isBuilding(){
 		return isBuilding;
+	}
+	
+	public boolean isEntrance() {
+		return isEntrance;
+	}
+
+	public void setEntrance(boolean isEntrance) {
+		this.isEntrance = isEntrance;
 	}
 }

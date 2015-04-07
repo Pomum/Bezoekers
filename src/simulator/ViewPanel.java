@@ -34,11 +34,11 @@ public class ViewPanel extends JPanel implements ActionListener
 		
 		Tile tile1 = new Tile(new Point2D.Double(0, 0));
 		tile1.setBuilding(true);
-		Tile tile2 = new Tile(new Point2D.Double(200 + 10, 0));
+		Tile tile2 = new Tile(new Point2D.Double(200 + 100, 0));
 		tile2.setBuilding(true);
-		Tile tile3 = new Tile(new Point2D.Double(0, 200 + 10));
+		Tile tile3 = new Tile(new Point2D.Double(0, 200 + 100));
 		tile3.setBuilding(true);
-		Tile tile4 = new Tile(new Point2D.Double(200 + 10, 200 + 10));
+		Tile tile4 = new Tile(new Point2D.Double(200 + 100, 200 + 100));
 		tile4.setEntrance(true);
 		tiles.add(tile1);
 		tiles.add(tile2);
