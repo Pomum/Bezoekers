@@ -34,6 +34,7 @@ public class ViewPanel extends JPanel implements ActionListener
 		
 		Tile tile1 = new Tile(new Point2D.Double(0, 0));
 		tile1.setBuilding(true);
+		
 		Tile tile2 = new Tile(new Point2D.Double(200 + 100, 0));
 		tile2.setBuilding(true);
 		Tile tile3 = new Tile(new Point2D.Double(0, 200 + 100));
@@ -44,8 +45,15 @@ public class ViewPanel extends JPanel implements ActionListener
 		tiles.add(tile2);
 		tiles.add(tile3);
 		tiles.add(tile4);
-		NPC npc1 = new NPC(new Point2D.Double(300, 300),tiles);
-		NPCs.add(npc1);
+		for(int i = 0 ; i < 25 ; i++){
+			Point2D point = new Point2D.Double(Math.random()*1024,Math.random()*768);
+			NPC npc = new NPC(point,tiles);
+			while(npc.hasCollision(NPCs)){
+				npc = new NPC(new Point2D.Double(Math.random()*1024,Math.random()*768), tiles);
+			}
+			NPCs.add(npc);
+			
+		}
 		//new PopUp(frame, tiles);
 	}
 	

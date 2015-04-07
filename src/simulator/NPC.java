@@ -24,7 +24,7 @@ public class NPC{
 		image = new ImageIcon(PATH).getImage();
 		this.position = position;
 		this.tiles = tiles;
-		speed = 1;
+		speed = 5;
 		direction = 1;
 		getDestination();
 		newTarget();
@@ -43,7 +43,6 @@ public class NPC{
 		} else{
 			destination = new Tile(new Point2D.Double(200,200));
 		}
-		System.out.println(destination.getPosition());
 	}
 	
 	public void update(List<NPC> andereNPCs) {
@@ -101,7 +100,6 @@ public class NPC{
 		if (!(tiles.isEmpty())) {
 			if (!(target == null)) {
 				if (target.getRect().contains(position)) {
-					System.out.println("ping");
 					/*for (int i = 0; i < target.getPaths().size(); i++) {
 						if (target.getPaths().get(i).getDestination().equals(destination)) {
 							target = target.getPaths().get(i).getTarget();
@@ -121,7 +119,6 @@ public class NPC{
 		} else {
 			target = destination;
 		}
-		//System.out.println(target.getPosition());
 	}
 	
 	
