@@ -2,15 +2,12 @@ package simulator;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
-import javax.swing.Timer;
 
 
 public class NPC{

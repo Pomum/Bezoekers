@@ -10,12 +10,12 @@ public class Table
 {
 	private JTable table;
 	private DefaultTableModel model;
-	private List<Tile> t;
+	private List<Tile> tiles;
 	
-	public Table(List<Tile> t)
+	public Table(List<Tile> tiles)
 	{
 		setModel();
-		this.t = t;
+		this.tiles = tiles;
 	}
 	
 	
