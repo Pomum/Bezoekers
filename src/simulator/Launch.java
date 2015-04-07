@@ -10,7 +10,10 @@ public class Launch{
 	public static void main(String[] args){
 		JFrame frame = new JFrame(":D");
 		JPanel panel = new ViewPanel(frame);
+		
 		frame.getContentPane().add(panel);
+		InputHandler input = new InputHandler(frame);
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setMinimumSize(new Dimension(1024,768));
 		frame.pack();
