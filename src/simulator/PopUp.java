@@ -47,7 +47,7 @@ public class PopUp extends JDialog
 		add.addActionListener(new ActionListener(){
 	    	public void actionPerformed(ActionEvent e)
 	    	{
-	    		
+	    		dispose();
 	    	}
 	    });
 		
@@ -64,17 +64,16 @@ public class PopUp extends JDialog
 	{
 		JLabel name = new JLabel(" Name:");
 		JTextField invlName = new JTextField();
-		JLabel isBuilding = new JLabel(" Is Building:");
+		JLabel empty = new JLabel("");
 		JCheckBox check = new JCheckBox("Building");
-		JLabel waypoints = new JLabel(" Waypoints:");
-		JLabel label = new JLabel(" ");
-		
+		JCheckBox entrance = new JCheckBox("Entrance");
+		JCheckBox exit = new JCheckBox("Exit");
 		
 		north.add(name);
 		north.add(invlName);
-		north.add(isBuilding);
+		north.add(empty);
 		north.add(check);
-		north.add(waypoints);
-		north.add(label);
+		north.add(entrance);
+		north.add(exit);
 	}
 }

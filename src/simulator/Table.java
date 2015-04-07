@@ -35,18 +35,21 @@ public class Table
 			@Override
 			public int getRowCount() {
 				
-				return t.size();
+				//return t.size();
+				return 5;
 			}
 
 			@Override
 			public Object getValueAt(int row, int col) {
 				if (col == 0)
 				{
-					return t.get(row).getDestination().getName();
+					//return t.get(row).getDestination().getName();
+					return "a";
 				} 
 				else if (col == 1)
 				{
-					return t.get(row).getTarget().getName();
+					//return t.get(row).getTarget().getName();
+					return "b";
 				}
 				else
 				{
@@ -73,13 +76,10 @@ public class Table
 		table.setCellSelectionEnabled(true);
 	}
 	
-	
-	
-	public void addRow(Tile destination, Tile target, JButton button)
+	public void addRow(Tile destination, Tile target)
 	{
-		model.addRow(new Object[]{destination, target, button});
+		model.addRow(new Object[]{destination, target});
 	}
-	
 	
 	public void removeRow(int row)
 	{
