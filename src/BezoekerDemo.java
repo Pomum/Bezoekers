@@ -47,8 +47,8 @@ public class BezoekerDemo extends JPanel implements ActionListener
 	{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
-		//g2.draw(s);
-		//g2.draw(s1);
+		g2.draw(s);
+		g2.draw(s1);
 		for(Bezoeker b : bezoekers)
 			b.paint(g2);
 	}
