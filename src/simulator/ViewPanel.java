@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,6 +18,7 @@ public class ViewPanel extends JPanel
 
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
+	private List<Tile> t;
 	
 	public ViewPanel(JFrame frame)
 	{
@@ -35,12 +37,12 @@ public class ViewPanel extends JPanel
 	
 	public void addPopUp()
 	{
-		JButton b = new JButton("POPUP :]");
+		JButton b = new JButton("POPUP =]");
 		
 		b.addActionListener(new ActionListener(){
 	    	public void actionPerformed(ActionEvent e)
 	    	{
-	    		new PopUp(frame);
+	    		new PopUp(frame, t);
 	    	}
 	    });
 		

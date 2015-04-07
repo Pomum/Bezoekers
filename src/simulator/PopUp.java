@@ -2,6 +2,9 @@ package simulator;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -19,14 +22,16 @@ public class PopUp extends JDialog
 	private static final long serialVersionUID = 1L;
 	private JPanel content;
 	private JPanel north;
-	
+	private List<Tile> t;
+	private Table table = new Table(t);
+	private JTable jtable = table.getJTable();
 		
 	
-	public PopUp(JFrame owner)
+	public PopUp(JFrame owner, List<Tile> t)
 	{
-		super(owner, "PopUp");
-//		setModalityType(ModalityType.APPLICATION_MODAL);
-		setLocationRelativeTo(owner);
+		super(owner, "PopUp =]");
+		setModalityType(ModalityType.APPLICATION_MODAL);
+		setLocationRelativeTo(null);
 		
 		content = new JPanel (new BorderLayout());
 		north = new JPanel(new GridLayout(3, 2));
@@ -35,10 +40,21 @@ public class PopUp extends JDialog
 		content.add(north, BorderLayout.NORTH);
 		
 		inhoud();
-		table();
+		this.t = t;
 		
 		JButton add = new JButton("add");
+		
+		add.addActionListener(new ActionListener(){
+	    	public void actionPerformed(ActionEvent e)
+	    	{
+	    		
+	    	}
+	    });
+		
 		content.add(add, BorderLayout.SOUTH);
+		
+		JScrollPane scrollPane = new JScrollPane(jtable);
+		content.add(scrollPane, BorderLayout.CENTER);
 		
 		setSize(400,400);
 	    setVisible(true);
@@ -60,18 +76,5 @@ public class PopUp extends JDialog
 		north.add(check);
 		north.add(waypoints);
 		north.add(label);
-	}
-	
-	public void table()
-	{
-		Object rowData[][] = {
-	    	    {"Podium 1", "Kruispunt 1"},
-	    	    {"Podium 2", "Kruispunt 2"},
-	    	    {"Podium 3", "Kruispunt 1"}
-	    	};
-		
-		JTable table = new JTable(new DefaultTableModel(rowData, new Object[]{"Destination:", "Target:"}));
-		JScrollPane scrollPane = new JScrollPane(table);
-		content.add(scrollPane, BorderLayout.CENTER);
 	}
 }
