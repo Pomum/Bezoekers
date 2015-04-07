@@ -9,12 +9,15 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.Icon;
+
 public class Tile {
 	private String name = "Tile";
 	private Point2D position;
 	private Shape rect;
 	private boolean isBuilding;
 	private boolean isEntrance;
+	private boolean isExit;
 	private double width = 200 ,height = 200;
 	private List<Path> Paths = new ArrayList<Path>();
 
@@ -22,6 +25,7 @@ public class Tile {
 		this.position = position;
 		isBuilding = false;
 		isEntrance = false;
+		isExit = false;
 		rect = new Rectangle2D.Double(position.getX(), position.getY(), width, height);
 	}
 
@@ -74,5 +78,12 @@ public class Tile {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public void setExit(boolean isExit){
+		this.isExit = isExit;
+	}
+	public boolean isExit() {
+		return isExit;
 	}
 }

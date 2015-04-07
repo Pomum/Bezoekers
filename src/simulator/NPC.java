@@ -21,7 +21,7 @@ public class NPC{
 		image = new ImageIcon(PATH).getImage();
 		this.position = position;
 		this.tiles = tiles;
-		speed = 0;
+		speed = 1;
 		direction = 1;
 		getDestination();
 		newTarget();

@@ -44,27 +44,7 @@ public class PopUp extends JDialog {
 		setVisible(true);
 	}
 
-	private void fillWindow() {
-		JLabel		 name 	  = new JLabel(" Name:");
-		JTextField 	 invlName = new JTextField(tile.getName());
-		JLabel 		 empty	  = new JLabel("");
-		JCheckBox 	 check 	  = new JCheckBox("Building");
-		JCheckBox 	 entrance = new JCheckBox("Entrance");
-		JCheckBox 	 exit 	  = new JCheckBox("Exit");
-
-		invlName.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				tile.setName(invlName.getText());
-			}
-		});
-		north.add(name);
-		north.add(invlName);
-		north.add(empty);
-		north.add(check);
-		north.add(entrance);
-		north.add(exit);
-	}
+	
 
 	private void initWindow() {
 		content = new JPanel(new BorderLayout());
@@ -72,7 +52,47 @@ public class PopUp extends JDialog {
 		setContentPane(content);
 		content.add(north, BorderLayout.NORTH);
 	}
+	
+	private void fillWindow() {
+		JLabel		 name 	  = new JLabel(" Name:");
+		JTextField 	 invlName = new JTextField(tile.getName());
+		JLabel 		 empty	  = new JLabel("");
+		JCheckBox 	 building = new JCheckBox("Building", tile.isBuilding());
+		JCheckBox 	 entrance = new JCheckBox("Entrance", tile.isEntrance());
+		JCheckBox 	 exit 	  = new JCheckBox("Exit", tile.isExit());
 
+		invlName.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tile.setName(invlName.getText());
+			}
+		});
+		
+		building.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tile.setBuilding(building.isSelected());
+			}
+		});
+		
+		entrance.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tile.setEntrance(entrance.isSelected());
+			}
+		});
+		
+		exit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tile.setExit(exit.isSelected());
+			}
+		});
+		
+		north.add(name);
+		north.add(invlName);
+		north.add(empty);
+		north.add(building);
+		north.add(entrance);
+		north.add(exit);
+	}
+	
 	private void initButton() {
 
 		JButton add = new JButton("add");
