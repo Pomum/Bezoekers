@@ -8,7 +8,6 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -19,11 +18,11 @@ public class ViewPanel extends JPanel implements ActionListener
 	private static final long serialVersionUID = 1L;
 	private List<Tile> tiles = new ArrayList<Tile>();
 	private List<NPC> NPCs = new ArrayList<NPC>();
-	private JFrame frame;
+	//private JFrame frame;
 	
 	public ViewPanel(JFrame frame)
 	{
-		this.frame = frame;
+		//this.frame = frame;
 		new InputHandler(frame, this, tiles);
 		initTest();
 		
@@ -36,16 +35,23 @@ public class ViewPanel extends JPanel implements ActionListener
 		Tile tile4 = new Tile(new Point2D.Double(200 + 100, 200 + 100));
 		
 		tile1.setBuilding(true);
-		tile2.setBuilding(true);
-		tile3.setBuilding(true);
+		tile3.setExit(true);
 		tile4.setEntrance(true);
+
+		tile1.setName("Building");
+		tile2.setName("Crossing");
+		tile3.setName("Exit");
+		tile4.setName("Entrance");
 		
 		tiles.add(tile1);
 		tiles.add(tile2);
 		tiles.add(tile3);
 		tiles.add(tile4);
 	
-		tile1.addPath(tile4, tile3);
+		tile4.addPath(tile1, tile2);
+		tile2.addPath(tile1, tile1);
+		
+		
 		for(int i = 0 ; i < 25 ; i++){
 			Point2D point = new Point2D.Double(Math.random()*1024,Math.random()*768);
 			NPC npc = new NPC(point,tiles);

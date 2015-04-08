@@ -3,13 +3,10 @@ package simulator;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.Icon;
 
 public class Tile {
 	
@@ -19,7 +16,8 @@ public class Tile {
 	private boolean isBuilding;
 	private boolean isEntrance;
 	private boolean isExit;
-	private double width = 200 ,height = 200;
+	private double width  = 200,
+				   height = 200;
 	private List<Path> Paths = new ArrayList<Path>();
 
 	public Tile(Point2D position){

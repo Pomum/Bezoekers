@@ -97,13 +97,12 @@ public class NPC{
 		if (!(tiles.isEmpty())) {
 			if (!(target == null)) {
 				if (target.getRect().contains(position)) {
-					/*for (int i = 0; i < target.getPaths().size(); i++) {
+					for (int i = 0; i < target.getPaths().size(); i++) {
 						if (target.getPaths().get(i).getDestination().equals(destination)) {
 							target = target.getPaths().get(i).getTarget();
 							break;
 						}
-					}*/
-					target = tiles.get(new Random().nextInt(tiles.size()));
+					}
 				}
 			}else{
 				for(int i = 0 ; i < tiles.size() ; i++){
