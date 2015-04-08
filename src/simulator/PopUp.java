@@ -154,7 +154,7 @@ public class PopUp extends JDialog {
 
 		JComboBox<Tile> boxTarget = new JComboBox<Tile>();
 		for (int i = 0; i < tiles.size(); i++) {
-			if (!(tiles.get(i).isBuilding()) || !(tiles.get(i).isEntrance())
+			if (!(tiles.get(i).isBuilding()) && !(tiles.get(i).isEntrance())
 					&& !(tiles.get(i).isExit())) {
 				boxTarget.addItem(tiles.get(i));
 			}
