@@ -33,7 +33,7 @@ public class PopUp extends JDialog {
 	private JTable jtable;
 
 	public PopUp(JFrame frame, Tile tile, List<Tile> tiles) {
-		super(frame, "PopUp");
+		super(frame, tile.getName());
 		this.tile = tile;
 		this.tiles = tiles;
 		this.frame = frame;
@@ -43,7 +43,7 @@ public class PopUp extends JDialog {
 		setLocationRelativeTo(null);
 
 		initWindow();
-		fillWindow();
+		fillWindow(frame);
 		initMisc();
 
 		setSize(400, 400);
@@ -57,14 +57,26 @@ public class PopUp extends JDialog {
 		content.add(north, BorderLayout.NORTH);
 	}
 
-	private void fillWindow() {
+	private void fillWindow(JFrame frame) {
 		JLabel name = new JLabel(" Name:");
 		JTextField invlName = new JTextField(tile.getName());
-		JLabel empty = new JLabel("");
+		JButton button = new JButton("Delete " + tile.getName());
 		JCheckBox building = new JCheckBox("Building", tile.isBuilding());
 		JCheckBox entrance = new JCheckBox("Entrance", tile.isEntrance());
 		JCheckBox exit = new JCheckBox("Exit", tile.isExit());
 
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String text =  "do you want do delete the tile: " + tile.getName();
+				if(JOptionPane.showConfirmDialog(frame,text) == 0){
+					for(int i = 0 ; i < tiles.size() ; i++)
+						if(tiles.get(i).equals(tile))
+							tiles.remove(i);
+					dispose();
+				}
+			}
+		});
+		
 		invlName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tile.setName(invlName.getText());
@@ -92,7 +104,7 @@ public class PopUp extends JDialog {
 
 		north.add(name);
 		north.add(invlName);
-		north.add(empty);
+		north.add(button);
 		north.add(building);
 		north.add(entrance);
 		north.add(exit);

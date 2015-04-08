@@ -26,11 +26,17 @@ public class InputHandler {
 					if(contact(clickPoint,selectTile)){
 						if(e.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(e)){
 							new PopUp(frame, selectTile, tiles);
+							break;
 						}
 						else{
 							tile = selectTile;
 						}
 					}
+				}
+				if(SwingUtilities.isMiddleMouseButton(e)){
+					Tile tile = new Tile(clickPoint);
+					tiles.add(tile);
+					new PopUp(frame, tile, tiles);
 				}
 			}
 			public void mouseReleased(MouseEvent e) {
