@@ -21,7 +21,7 @@ public class NPC{
 		image = new ImageIcon(PATH).getImage();
 		this.position = position;
 		this.tiles = tiles;
-		speed = 5;
+		speed = 1;
 		direction = 1;
 		getDestination();
 		newTarget();
@@ -127,5 +127,10 @@ public class NPC{
 		tx.rotate(direction, 8, 8);
 		
 		g.drawImage(image, tx ,null);
+	}
+	
+	public Point2D getPosition()
+	{
+		return position;
 	}
 }
