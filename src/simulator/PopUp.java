@@ -68,6 +68,7 @@ public class PopUp extends JDialog {
 		invlName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tile.setName(invlName.getText());
+				dispose();
 			}
 		});
 
