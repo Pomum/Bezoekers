@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.Icon;
 
 public class Tile {
+	
 	private String name = "Tile";
 	private Point2D position;
 	private Shape rect;
@@ -42,6 +43,10 @@ public class Tile {
 		return center;
 	}
 
+	public void addPath(Tile destination, Tile target){
+		Paths.add(new Path(destination,target));
+	}
+	
 	public List<Path> getPaths() {
 		return Paths;
 	}
@@ -85,5 +90,9 @@ public class Tile {
 	}
 	public boolean isExit() {
 		return isExit;
+	}
+	
+	public String toString(){
+		return name;
 	}
 }

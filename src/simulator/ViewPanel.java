@@ -30,21 +30,22 @@ public class ViewPanel extends JPanel implements ActionListener
 		new Timer(1000/60,this).start();
 	}
 	private void initTest(){
-		addPopUp();
-		
 		Tile tile1 = new Tile(new Point2D.Double(0, 0));
-		tile1.setBuilding(true);
-		
 		Tile tile2 = new Tile(new Point2D.Double(200 + 100, 0));
-		tile2.setBuilding(true);
 		Tile tile3 = new Tile(new Point2D.Double(0, 200 + 100));
-		tile3.setBuilding(true);
 		Tile tile4 = new Tile(new Point2D.Double(200 + 100, 200 + 100));
+		
+		tile1.setBuilding(true);
+		tile2.setBuilding(true);
+		tile3.setBuilding(true);
 		tile4.setEntrance(true);
+		
 		tiles.add(tile1);
 		tiles.add(tile2);
 		tiles.add(tile3);
 		tiles.add(tile4);
+	
+		tile1.addPath(tile4, tile3);
 		for(int i = 0 ; i < 25 ; i++){
 			Point2D point = new Point2D.Double(Math.random()*1024,Math.random()*768);
 			NPC npc = new NPC(point,tiles);
@@ -52,9 +53,7 @@ public class ViewPanel extends JPanel implements ActionListener
 				npc = new NPC(new Point2D.Double(Math.random()*1024,Math.random()*768), tiles);
 			}
 			NPCs.add(npc);
-			
 		}
-		//new PopUp(frame, tiles);
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -68,17 +67,6 @@ public class ViewPanel extends JPanel implements ActionListener
 		}
 	}
 	
-	public void addPopUp() {
-		JButton b = new JButton("POPUP =]");
-
-		b.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new PopUp(frame, tiles, tiles.get(0));
-			}
-		});
-		this.add(b);
-	}
-
 	public void actionPerformed(ActionEvent e) {
 		for(NPC npc : NPCs){
 			npc.update(NPCs);

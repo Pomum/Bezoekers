@@ -20,7 +20,7 @@ public class InputHandler {
 					if(contact(mousePosition,tile)){
 						System.out.println(e.getX() +" "+ e.getY());
 						if(SwingUtilities.isMiddleMouseButton(e)){
-							new PopUp(frame, tiles, tile);
+							new PopUp(frame, tile, tiles);
 						}
 					}
 				}
