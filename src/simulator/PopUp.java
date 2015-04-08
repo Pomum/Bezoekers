@@ -143,7 +143,7 @@ public class PopUp extends JDialog {
 
 		JComboBox<Tile> boxDestination = new JComboBox<Tile>();
 		for (int i = 0; i < tiles.size(); i++) {
-			if (tiles.get(i).isBuilding()) {
+			if (tiles.get(i).isBuilding() || tiles.get(i).isExit()) {
 				boxDestination.addItem(tiles.get(i));
 			}
 		}
@@ -153,8 +153,7 @@ public class PopUp extends JDialog {
 
 		JComboBox<Tile> boxTarget = new JComboBox<Tile>();
 		for (int i = 0; i < tiles.size(); i++) {
-			if (!(tiles.get(i).isBuilding()) && !(tiles.get(i).isEntrance())
-					&& !(tiles.get(i).isExit())) {
+			if (!(tiles.get(i).isEntrance())) {
 				boxTarget.addItem(tiles.get(i));
 			}
 		}
