@@ -32,6 +32,14 @@ public class Tile {
 		return rect;
 	}
 	
+	public void setRect(Shape s){
+		this.rect =s;
+	}
+	
+	public void setPosition(Point2D position){
+		this.position = position;
+	}
+	
 	public Point2D getPosition(){
 		return position;
 	}
@@ -66,13 +74,14 @@ public class Tile {
 	}
 	
 	public void paint(Graphics2D g)
-	{ 	
+ {
+		rect = new Rectangle2D.Double(position.getX(), position.getY(),	width, height);
 		g.setColor(Color.GRAY);
-		g.draw(new Rectangle2D.Double(rect.getBounds2D().getX()-1, rect.getBounds2D().getY()-1, width+1, height+1));
+		g.draw(new Rectangle2D.Double(rect.getBounds2D().getX() - 1, rect.getBounds2D().getY() - 1,	width + 1, height + 1));
 		g.setColor(Color.LIGHT_GRAY);
 		g.fill(rect);
 		g.setColor(Color.RED);
-		g.drawString(name,(int) position.getX(),(int)( position.getY()+height));
+		g.drawString(name, (int) position.getX(), (int) (position.getY() + height));
 	}
 
 	public String getName() {
@@ -88,6 +97,14 @@ public class Tile {
 	}
 	public boolean isExit() {
 		return isExit;
+	}
+	
+	public void setWidth(double width){
+		this.width = width;
+	}
+	
+	public void setHeight(double height){
+		this.height = height;
 	}
 	
 	public double getWidth(){
