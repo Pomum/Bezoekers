@@ -90,14 +90,6 @@ public class Tile {
 		return isExit;
 	}
 	
-	public double getWidth(){
-		return width;
-	}
-	
-	public double getHeight(){
-		return height;
-	}
-	
 	public String toString(){
 		return name;
 	}

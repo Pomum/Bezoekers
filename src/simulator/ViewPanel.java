@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,9 +18,11 @@ public class ViewPanel extends JPanel implements ActionListener
 	private static final long serialVersionUID = 1L;
 	private List<Tile> tiles = new ArrayList<Tile>();
 	private List<NPC> NPCs = new ArrayList<NPC>();
+	//private JFrame frame;
 	
 	public ViewPanel(JFrame frame)
 	{
+		//this.frame = frame;
 		new InputHandler(frame, this, tiles);
 		initTest();
 		
@@ -51,26 +52,12 @@ public class ViewPanel extends JPanel implements ActionListener
 		tile2.addPath(tile1, tile1);
 		
 		
-		for(int i = 0 ; i < 50 ; i++){
-			NPC npc;
-			Tile entrance;
-			Point2D point;
-			List<Tile> entrances = new ArrayList<Tile>();
-			
-			for(Tile tile : tiles){
-				if(tile.isEntrance()){
-					entrances.add(tile);
-				}
+		for(int i = 0 ; i < 25 ; i++){
+			Point2D point = new Point2D.Double(Math.random()*1024,Math.random()*768);
+			NPC npc = new NPC(point,tiles);
+			while(npc.hasCollision(NPCs)){
+				npc = new NPC(new Point2D.Double(Math.random()*1024,Math.random()*768), tiles);
 			}
-			
-			entrance = entrances.get(new Random().nextInt(entrances.size()));
-			
-			do {
-				point = new Point2D.Double(
-						entrance.getPosition().getX() + Math.random()*entrance.getWidth(),
-						entrance.getPosition().getY() + Math.random()*entrance.getHeight());
-				npc = new NPC(point,tiles);
-			} while (npc.hasCollision(NPCs));
 			NPCs.add(npc);
 		}
 	}

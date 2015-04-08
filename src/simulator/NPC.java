@@ -117,6 +117,7 @@ public class NPC{
 		}
 	}
 	
+	
 	public void paint(Graphics2D g)
 	{
 		AffineTransform tx = new AffineTransform();
