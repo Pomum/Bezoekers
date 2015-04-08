@@ -21,7 +21,7 @@ public class NPC{
 		image = new ImageIcon(PATH).getImage();
 		this.position = position;
 		this.tiles = tiles;
-		speed = 1;
+		speed = 5;
 		direction = 1;
 		getDestination();
 		newTarget();
@@ -30,11 +30,11 @@ public class NPC{
 	public void getDestination() {
 		if (!(tiles.isEmpty())){
 			Random random = new Random();
-			Tile oldDestination = destination;
-			while (destination == oldDestination) {
+			while (true) {
 				int number = random.nextInt(tiles.size());
-				if (tiles.get(number).isBuilding()) {
+				if (tiles.get(number).isBuilding() && tiles.get(number).isBuilding()) {
 					destination = tiles.get(number);
+					break;
 				}
 			}
 		} else{
@@ -97,6 +97,9 @@ public class NPC{
 		if (!(tiles.isEmpty())) {
 			if (!(target == null)) {
 				if (target.getRect().contains(position)) {
+					if(destination.getRect().contains(position)){
+						getDestination();
+					}
 					for (int i = 0; i < target.getPaths().size(); i++) {
 						if (target.getPaths().get(i).getDestination().equals(destination)) {
 							target = target.getPaths().get(i).getTarget();
