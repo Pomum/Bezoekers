@@ -22,7 +22,8 @@ public class ViewPanel extends JPanel implements ActionListener
 	private List<Tile> tiles = new ArrayList<Tile>();
 	private List<NPC> NPCs = new ArrayList<NPC>();
 	private boolean delay = false;
-	private int amountOfVisitors = 50;
+	private Tile entrance;
+	private int aantalBezoekers = 100;
 	
 	public ViewPanel(JFrame frame)
 	{
@@ -65,9 +66,8 @@ public class ViewPanel extends JPanel implements ActionListener
 		tile4.addPath(tile3, tile2);
 		
 		
-		for(int i = 0 ; i < 50 ; i++){
-			NPC npc;
-			Tile entrance;
+		for(int i = 0 ; i < aantalBezoekers ; i++){
+			NPC npc;			
 			Point2D point;
 			List<Tile> entrances = new ArrayList<Tile>();
 			
@@ -85,12 +85,14 @@ public class ViewPanel extends JPanel implements ActionListener
 						entrance.getPosition().getY() + Math.random()*entrance.getHeight());
 				npc = new NPC(point,tiles);
 			} while (npc.hasCollision(NPCs));
+			
 			NPCs.add(npc);
+			//enterEntrance();
 		}
 	}
 	
 	private void checkVisitors() {
-		for (int i = NPCs.size(); i < amountOfVisitors; i++) {
+		for (int i = NPCs.size(); i < aantalBezoekers; i++) {
 			NPC npc;
 			Tile entrance;
 			Point2D point;
@@ -153,5 +155,20 @@ public class ViewPanel extends JPanel implements ActionListener
 		}
 		checkVisitors();	
 		repaint();
+	}
+	
+	public void enterEntrance()
+	{
+		int counter = 0;
+		int numberNPC = (int)(entrance.getWidth() * entrance.getHeight() / 225);
+		
+		for(NPC npc : NPCs)
+		{
+			if(entrance.getRect().contains(npc.getPosition()))
+			{
+				counter++;
+				if(counter >= numberNPC){}
+			}
+		}
 	}
 }
