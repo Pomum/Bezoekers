@@ -2,12 +2,15 @@ package simulator;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 
 public class NPC{
@@ -17,6 +20,7 @@ public class NPC{
 	private double speed,direction;
 	private Tile target,destination;
 	private List<Tile> tiles;
+	
 	public NPC(Point2D position, List<Tile> tiles){
 		image = new ImageIcon(PATH).getImage();
 		this.position = position;
@@ -28,17 +32,13 @@ public class NPC{
 	}
 	
 	public void getDestination() {
-		if (!(tiles.isEmpty())){
-			Random random = new Random();
-			while (true) {
-				int number = random.nextInt(tiles.size());
-				if (tiles.get(number).isBuilding() && tiles.get(number).isBuilding()) {
-					destination = tiles.get(number);
-					break;
-				}
+		Random random = new Random();
+		while (true) {
+			int number = random.nextInt(tiles.size());
+			if (tiles.get(number).isBuilding() || tiles.get(number).isExit()) {
+				destination = tiles.get(number);
+				break;
 			}
-		} else{
-			destination = new Tile(new Point2D.Double(200,200));
 		}
 	}
 	
@@ -97,8 +97,15 @@ public class NPC{
 		if (!(tiles.isEmpty())) {
 			if (!(target == null)) {
 				if (target.getRect().contains(position)) {
-					if(destination.getRect().contains(position)){
-						getDestination();
+					if (destination.getRect().contains(position)) {
+						Timer timer = new Timer((int) (30000 * Math.random()),
+								new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										getDestination();
+									}
+								});
+						timer.setRepeats(false);
+						timer.start();
 					}
 					for (int i = 0; i < target.getPaths().size(); i++) {
 						if (target.getPaths().get(i).getDestination().equals(destination)) {
@@ -120,6 +127,10 @@ public class NPC{
 		}
 	}
 	
+	public NPC returnSelf() {
+		return this;
+	}
+	
 	public void paint(Graphics2D g)
 	{
 		AffineTransform tx = new AffineTransform();
@@ -127,5 +138,10 @@ public class NPC{
 		tx.rotate(direction, 8, 8);
 		
 		g.drawImage(image, tx ,null);
+	}
+	
+	public Point2D getPosition()
+	{
+		return position;
 	}
 }

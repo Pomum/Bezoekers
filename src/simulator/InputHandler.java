@@ -5,7 +5,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -69,7 +68,7 @@ public class InputHandler {
 		});
 	}
 	
-	private boolean contact(Point mousePosition, Tile tile) {
-		return tile.getRect().contains(mousePosition);
+	private boolean contact(Point clickPosition, Tile tile) {
+		return tile.getRect().contains(clickPosition);
 	}
 }
